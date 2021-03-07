@@ -1,21 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import { Provider as ReduxProvider } from 'react-redux';
+import { persistStore } from 'redux-persist';
+import { theme, GalioProvider } from 'galio-framework';
+import { PersistGate } from 'redux-persist/es/integration/react';
+import Root from './src/components/Root';
+import { store } from './store';
+
+const persistor = persistStore(store);
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    <GalioProvider theme={theme}>
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Root />
+        </PersistGate>
+      </ReduxProvider>
+    </GalioProvider>
+  )
+};9
