@@ -3,14 +3,13 @@ import { RootModel } from './';
 
 export const session = createModel<RootModel>()({
   state: {
-    error: null,
-    auth: null,
-    user: null,
+    auth: "auth",
+    user: {
+      first_name: 'Piyush',
+      last_name: 'Kakadiya'
+    },
   } as SessionState,
   reducers: {
-    setError(state, error: string | null) {
-      return { ...state, error };
-    },
     setAuth(state, auth: string | null) {
       return { ...state, auth };
     },
@@ -21,29 +20,39 @@ export const session = createModel<RootModel>()({
   effects: (dispatch) => ({
     async authenticate() {
       try {
-        dispatch.session.setError(null);
+        dispatch.session.setAuth(null);
       } catch (e) {
+        dispatch.alerts.raiseError({
+          domain: 'session',
+          message: e.message,
+        });
       }
     },
     async register() {
       try {
-        dispatch.session.setError(null);
+        dispatch.session.setUser(null);
       } catch (e) {
+        dispatch.alerts.raiseError({
+          domain: 'session',
+          message: e.message,
+        });
       }
     },
     async logout() {
       try {
         dispatch.session.setAuth(null);
         dispatch.session.setUser(null);
-        dispatch.session.setError(null);
       } catch (e) {
+        dispatch.alerts.raiseError({
+          domain: 'session',
+          message: e.message,
+        });
       }
     },
   }),
 });
 
 export type SessionState = {
-  error: string | null,
   user: User | null,
   auth: string | null,
 };
