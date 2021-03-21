@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Login } from '../screens/Login';
 
-type AuthStackParamList = {
+export type AuthStackParamList = {
   Login: undefined;
 };
 

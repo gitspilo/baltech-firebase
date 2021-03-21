@@ -1,17 +1,20 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Abcd } from '../screens/Abcd';
+import { Features } from '../screens/Features';
 
-type HomeStackParamList = {
+export type HomeStackParamList = {
   Abcd: undefined;
+  Features: undefined;
 };
 
-const AuthStack = createStackNavigator<HomeStackParamList>();
+const Hometack = createStackNavigator<HomeStackParamList>();
 
 export function HomeNavigation() {
   return (
-    <AuthStack.Navigator>
-      <AuthStack.Screen name="Abcd" component={Abcd} />
-    </AuthStack.Navigator>
+    <Hometack.Navigator>
+      <Hometack.Screen name="Features" component={Features} />
+      <Hometack.Screen name="Abcd" component={Abcd} />
+    </Hometack.Navigator>
   );
 }

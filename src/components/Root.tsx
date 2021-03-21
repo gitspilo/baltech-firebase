@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Block } from 'galio-framework';
 import { useSelector } from 'react-redux';
 import DropdownAlert from 'react-native-dropdownalert';
@@ -21,11 +22,13 @@ export default function Root() {
   }, [alerts, alertsProcessed]);
 
   return (
-    <NavigationContainer ref={navigationRef}>
-      <Block flex>
-        <NavigatorSwitch />
-        <DropdownAlert ref={dropdown} closeInterval={5000} />
-      </Block>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+        <Block flex>
+          <NavigatorSwitch />
+          <DropdownAlert ref={dropdown} closeInterval={5000} />
+        </Block>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
