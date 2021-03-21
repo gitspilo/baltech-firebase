@@ -4,11 +4,11 @@ import { RootModel } from './';
 
 export const abcd = createModel<RootModel>()({
   state: {
-    abcd: [],
+    all: [],
   } as AbcdState,
   reducers: {
-    setAbcd(state, abcd: Abcd[]) {
-      return { ...state, abcd };
+    setAbcd(state, all: Abcd[]) {
+      return { ...state, all };
     },
   },
   effects: (dispatch) => ({
@@ -30,10 +30,12 @@ export const abcd = createModel<RootModel>()({
 });
 
 export type AbcdState = {
-  abcd: Abcd[],
+  all: Abcd[],
 };
 
 export type Abcd = {
   capital: string,
   small: string,
+  imageURL: string,
+  label: string,
 };
